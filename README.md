@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stock Intelligence Platform
 
-## Getting Started
+A handcrafted, high-density, production-grade financial market intelligence terminal and chatbot. Designed with Bloomberg and TradingView aesthetics. Built with Next.js 15, PostgreSQL, Prisma, NextAuth, OpenAI API streaming, Power BI Embedded, Telegram webhook alerts, and WhatsApp Cloud queues.
 
-First, run the development server:
+## Core Feature Areas
+- **Live Market Feed & Fallback Layer**: Implements a cascading provider strategy (Finnhub ➔ Polygon.io ➔ Alpha Vantage ➔ Yahoo Finance) with in-memory caching and rate-limit safeguards.
+- **Quant Chat Assistant**: Grounded completion chatbot that extracts symbols, fetches quotes, technical averages (RSI/SMA/EMA), and sentiment indicators before generating OpenAI completions.
+- **Watchlists & Threshold Alerts**: Track tickers, draft stock analysis logs, and deploy price alert triggers to Telegram or WhatsApp.
+- **Power BI Secure Embeds**: Embedded report viewer powered by secure client token generation using Microsoft Azure AAD.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Tech Stack
+- **Frontend**: Next.js 15 (App Router), TypeScript, Tailwind CSS, TanStack Query, Framer Motion, Lucide Icons.
+- **Backend**: Server Actions, API Routes, Edge stream handlers.
+- **Storage & Auth**: PostgreSQL, Prisma ORM, NextAuth JWT session handler.
+- **Bots**: Meta WhatsApp Cloud API, Telegram Bot API.
+
+---
+
+## Folder Structure
+```
+stock-intelligence-platform/
+├── prisma/               # DB schema file
+├── app/                  # Next.js App Router (RSC page grids & API routes)
+├── components/           # Reusable UI cards, Markdown parsers, Power BI embeds
+├── features/             # Shared client hooks and structures
+├── services/             # Live Market Providers, News Engines, WhatsApp, Telegram, Power BI
+├── docs/                 # Guides for setup and architecture
+└── tests/                # Unit and Integration test files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quick Start Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-## Learn More
+### 2. Configure Environment Settings
+Create a `.env` file in the root folder (see [DEPLOYMENT.md](file:///Users/abyjoseph/.gemini/antigravity-ide/scratch/stock-intelligence-platform/DEPLOYMENT.md) for full configuration keys).
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Initialize Prisma Database
+Configure a local or cloud PostgreSQL database and push schemas:
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Boot Dev Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the terminal workspace dashboard.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Guides & Documentation
+- [Architecture & Design Details](file:///Users/abyjoseph/.gemini/antigravity-ide/scratch/stock-intelligence-platform/docs/ARCHITECTURE.md)
+- [Production Deployment Guide](file:///Users/abyjoseph/.gemini/antigravity-ide/scratch/stock-intelligence-platform/DEPLOYMENT.md)
+- [Telegram Webhook Setup](file:///Users/abyjoseph/.gemini/antigravity-ide/scratch/stock-intelligence-platform/docs/TELEGRAM_SETUP.md)
+- [WhatsApp Cloud API Config](file:///Users/abyjoseph/.gemini/antigravity-ide/scratch/stock-intelligence-platform/docs/WHATSAPP_SETUP.md)
+- [Microsoft Power BI Embed Config](file:///Users/abyjoseph/.gemini/antigravity-ide/scratch/stock-intelligence-platform/docs/POWERBI_SETUP.md)

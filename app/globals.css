@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Bloomberg & TradingView Inspired Dark System Colors */
+  --background: #0b0e11;      /* Deep Slate/Carbon background */
+  --foreground: #d1d4dc;      /* Cool white/silver text */
+  --card-bg: #131722;         /* TradingView dark card style */
+  --card-border: #2a2e39;     /* Deep slate border lines */
+  --primary: #2962ff;         /* TradingView signature blue */
+  --primary-hover: #1e4bd8;
+  --accent: #1e222d;          /* Darker secondary surface */
+  --gainer: #26a69a;          /* TradingView Green */
+  --loser: #ef5350;           /* TradingView Red */
+  --neutral: #787b86;         /* Cool gray secondary text */
 }
 
-@theme inline {
+/* Custom system scrollbar variables */
+:root {
+  --color-scrollbar-track: #0b0e11;
+  --color-scrollbar-thumb: #2a2e39;
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+}
+
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-card: var(--card-bg);
+  --color-border: var(--card-border);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-gainer: var(--gainer);
+  --color-loser: var(--loser);
+  --color-neutral: var(--neutral);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-geist-sans);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  color-scheme: dark;
+}
+
+/* Custom Scrollbars for Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--card-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral);
+}
+
+/* Bloomberg terminal-like blinking cursor */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: var(--primary);
+  animation: blink 1s step-end infinite;
+}
+
+/* Custom visual chart helpers */
+.chart-grid-line {
+  stroke: rgba(42, 46, 57, 0.5);
 }
