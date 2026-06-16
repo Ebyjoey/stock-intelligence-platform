@@ -56,10 +56,10 @@ export async function POST(req: NextRequest) {
         'Connection': 'keep-alive',
       },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Chat API Error:', err);
     return new Response(
-      JSON.stringify({ error: 'Internal Server Error during chatbot completion.', details: err.message }),
+      JSON.stringify({ error: 'Internal Server Error during chatbot completion.', details: err instanceof Error ? err.message : 'Unknown error' }),
       {
         status: 500,
         headers: { 'Content-Type': 'application/json' },

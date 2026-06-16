@@ -5,11 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { 
   Send, 
   MessageSquareCode, 
-  Trash2, 
-  Sparkles, 
-  HelpCircle,
-  FileText,
-  AlertTriangle
+  Trash2
 } from 'lucide-react';
 import Markdown from '@/components/chat/markdown';
 
@@ -99,8 +95,8 @@ Enter a ticker symbol (e.g. \`TSLA\`, \`AAPL\`) or ask analytical questions to r
           });
         }
       }
-    } catch (err) {
-      console.error('Streaming API error:', err);
+    } catch (_err) {
+      console.error('Streaming API error:', _err);
       setMessages(prev => {
         const next = [...prev];
         if (next[assistantIndex]) {

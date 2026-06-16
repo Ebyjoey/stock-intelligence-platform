@@ -6,7 +6,6 @@ import {
   BarChart4, 
   RefreshCw, 
   SlidersHorizontal,
-  Layers,
   ChevronRight,
   ShieldCheck
 } from 'lucide-react';
@@ -51,7 +50,7 @@ export default function PowerBIPage() {
       if (!res.ok) throw new Error('Token endpoint request failed');
       const data = await res.json();
       setConfig(data);
-    } catch (err) {
+    } catch {
       setError('Unable to authenticate secure embedding channel.');
     } finally {
       setLoading(false);

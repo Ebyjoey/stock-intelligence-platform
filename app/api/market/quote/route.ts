@@ -14,8 +14,8 @@ export async function GET(req: NextRequest) {
 
     const quote = await marketDataService.getQuote(symbol);
     return NextResponse.json(quote);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Market Quote API error:', err);
-    return NextResponse.json({ error: 'Failed to fetch quote data', details: err.message }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch quote data', details: err instanceof Error ? err.message : 'Unknown error' }, { status: 500 });
   }
 }

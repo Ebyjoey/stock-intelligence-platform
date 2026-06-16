@@ -100,7 +100,7 @@ export class AlphaVantageProvider extends MarketDataProvider {
     const performance = data['Rank A: Real-Time Performance'];
     if (!performance) throw new Error('Alpha Vantage sector performance not available or rate-limited');
 
-    return Object.entries(performance).map(([name, val]: [string, any]) => ({
+    return Object.entries(performance).map(([name, val]: [string, string]) => ({
       name,
       changePercent: parseFloat(val.replace('%', '')),
     }));

@@ -15,8 +15,8 @@ export async function GET(req: NextRequest) {
 
     const config = await powerBIService.getEmbedConfig(reportId);
     return NextResponse.json(config);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Power BI Token Endpoint Error:', err);
-    return NextResponse.json({ error: 'Failed to generate Power BI token', details: err.message }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to generate Power BI token', details: err instanceof Error ? err.message : 'Unknown error' }, { status: 500 });
   }
 }

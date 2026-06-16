@@ -31,8 +31,8 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (err: any) {
+    err: unknown) {
     console.error('WhatsApp Webhook Route Error:', err);
-    return NextResponse.json({ error: 'Webhook payload parsing failed', details: err.message }, { status: 500 });
+    return NextResponse.json({ error: 'Webhook payload parsing failed', details: err instanceof Error ? err.message : 'Unknown error' }, { status: 500 });
   }
 }

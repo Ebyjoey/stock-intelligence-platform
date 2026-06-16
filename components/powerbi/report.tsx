@@ -11,7 +11,7 @@ interface PowerBIReportProps {
     $schema: string;
     target: { table: string; column: string };
     operator: string;
-    values: any[];
+    values: (string | number)[];
   }>;
 }
 

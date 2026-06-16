@@ -7,11 +7,7 @@ import {
   Plus, 
   Trash2, 
   Bell, 
-  StickyNote, 
-  TrendingUp, 
-  TrendingDown, 
-  UserCheck,
-  AlertCircle
+  StickyNote
 } from 'lucide-react';
 import { 
   getWatchlist, 
@@ -35,7 +31,7 @@ export default function WatchlistsPage() {
   const [watchlistItems, setWatchlistItems] = useState<{ symbol: string }[]>([]);
   const [watchlistData, setWatchlistData] = useState<WatchlistItemData[]>([]);
   const [notes, setNotes] = useState<{ symbol: string; content: string }[]>([]);
-  const [alerts, setAlerts] = useState<any[]>([]);
+  const [alerts, setAlerts] = useState<{ id: string; symbol: string; type: string; targetPrice: number; channel: string }[]>([]);
 
   // Inputs
   const [newSymbol, setNewSymbol] = useState('');
@@ -86,8 +82,8 @@ export default function WatchlistsPage() {
       } else {
         setWatchlistData([]);
       }
-    } catch (err) {
-      console.error('Error loading watchlist data:', err);
+    } catch (_err) {
+      console.error('Error loading watchlist data:', _err);
     } finally {
       setIsLoading(false);
     }
@@ -100,7 +96,7 @@ export default function WatchlistsPage() {
       await addWatchlistItem(newSymbol);
       setNewSymbol('');
       await loadUserData();
-    } catch (err) {
+    } catch (_err) {
       alert('Failed to add ticker.');
     }
   };
@@ -109,7 +105,7 @@ export default function WatchlistsPage() {
     try {
       await removeWatchlistItem(symbol);
       await loadUserData();
-    } catch {
+    } catch (_err) {
       alert('Failed to remove ticker.');
     }
   };

@@ -75,7 +75,7 @@ class ChatbotService {
         });
 
         return ctx;
-      } catch (err) {
+      } catch (_err) {
         return '[System Information] Unable to fetch market indices. Proceeding with general financial reasoning.';
       }
     }
@@ -104,7 +104,7 @@ class ChatbotService {
           context += `- "${art.title}" (${art.source}) - Sentiment: ${art.sentiment} (Impact: ${art.impactScore}/10)\n`;
         });
         context += `\n`;
-      } catch (err) {
+      } catch (_err) {
         context += `Unable to retrieve detailed live info for symbol: ${sym}. Please notify client if the ticker is invalid.\n\n`;
       }
     }
@@ -118,7 +118,7 @@ class ChatbotService {
   async getStreamingResponse(
     messages: { role: 'user' | 'assistant' | 'system'; content: string }[],
     userMessage: string
-  ): Promise<any> {
+  ): Promise<AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk> | ReadableStream<Uint8Array>> {
     const symbols = this.extractSymbols(userMessage);
     const context = await this.buildMarketContext(symbols);
 

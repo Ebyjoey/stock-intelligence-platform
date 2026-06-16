@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
 
     await telegramService.handleWebhookUpdate(update);
     return NextResponse.json({ ok: true });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Telegram Webhook Route Error:', err);
-    return NextResponse.json({ error: 'Webhook processing failed', details: err.message }, { status: 500 });
+    return NextResponse.json({ error: 'Webhook processing failed', details: err instanceof Error ? err.message : 'Unknown error' }, { status: 500 });
   }
 }

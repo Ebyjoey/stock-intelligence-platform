@@ -57,7 +57,7 @@ export async function addWatchlistItem(symbol: string) {
       },
     });
     revalidatePath('/watchlists');
-  } catch (err) {
+  } catch {
     // Item might already exist, catch silently
   }
 }
